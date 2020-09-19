@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
-  const [id, setId] = useState();
+  // hook to set user id's
+  // const [id, setId] = useState();
 
-  return (
-    <div className="App">
-      <>
-        {id}
-        {/* set id of a user */}
-        <Login onIdSubmit={setId} />
-      </>
-    </div>
-  );
+  // useLocalStorage to pass the key(id) and write in into the local storage
+  // in Dev Tools -> App -> Local Storage - key + value is created! (whats-app-clone-id ---- uuid)
+  const [id, setId] = useLocalStorage('id');
+
+  return id ? <Dashboard id={id} /> : <Login onIdSubmit={setId} />;
 }
 
 export default App;

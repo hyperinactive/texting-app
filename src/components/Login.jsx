@@ -1,5 +1,7 @@
+// useRef is like a “box” that can hold a mutable value in its .current property
 import React, { useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import { v4 as uuidV4 } from 'uuid';
 
 // validate props?
 // eslint-disable-next-line react/prop-types
@@ -9,6 +11,10 @@ function Login({ onIdSubmit }) {
     e.preventDefault();
     onIdSubmit(idRef.current.value);
   };
+  // fn to create new ids
+  function createNewId() {
+    onIdSubmit(uuidV4());
+  }
 
   return (
     <Container
@@ -23,7 +29,7 @@ function Login({ onIdSubmit }) {
         <Button type="submit" className="mr-2">
           Login
         </Button>
-        <Button variant="secondary">Create a new id</Button>
+        <Button onClick={createNewId} variant="secondary">Create a new id</Button>
       </Form>
     </Container>
   );
