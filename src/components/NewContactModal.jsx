@@ -1,14 +1,17 @@
 import React, { useRef } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useContactsFunction } from '../context/ContactsProvider';
 
 // eslint-disable-next-line react/prop-types
 export default function NewContactModal({ closeModal }) {
   const idRef = useRef();
   const nameRef = useRef();
+  // imported function from the context
+  const { createContact } = useContactsFunction();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // createContact(idRef.current.value, nameRef.current.value);
+    createContact(idRef.current.value, nameRef.current.value);
     closeModal();
   };
   return (
